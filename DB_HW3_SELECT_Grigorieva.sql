@@ -24,8 +24,16 @@ WHERE name NOT LIKE '% %';
 -- Треки со словом my или мой
 SELECT name
 FROM songs
-WHERE LOWER(name) LIKE '%my%'
-   OR LOWER(name) LIKE '%мой%';
+WHERE
+    -- MY
+    LOWER(name) LIKE 'my %' OR
+    LOWER(name) LIKE '% my' OR
+    LOWER(name) LIKE '% my %' OR
+    LOWER(name) = 'my' OR
+    LOWER(name) LIKE 'мой %' OR
+    LOWER(name) LIKE '% мой' OR
+    LOWER(name) LIKE '% мой %' OR
+    LOWER(name) = 'мой';
 
 
 -- ЗАДАНИЕ 3
@@ -71,11 +79,11 @@ WHERE si.name = 'Руки Вверх!';
 -- ЗАДАНИЕ 4
 
 -- Альбомы с исполнителями более одного жанра
-SELECT a.name
+SELECT DISTINCT a.name
 FROM albums a
 JOIN album_singers als ON a.id = als.album_id
 JOIN singer_genres sg ON als.singer_id = sg.singer_id
-GROUP BY a.name
+GROUP BY a.name, als.singer_id
 HAVING COUNT(DISTINCT sg.genre_id) > 1;
 
 -- Треки, не входящие в сборники

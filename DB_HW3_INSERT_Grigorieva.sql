@@ -28,11 +28,10 @@ INSERT INTO albums (name, year) VALUES
 INSERT INTO album_singers VALUES
 (1, 1),
 (2, 1),
-(3, 1);
+(3, 1),
 (3, 2),
 (4, 2),
 (5, 5);
-
 
 INSERT INTO songs (name, duration, album_id) VALUES
 ('Тучи', 230, 1),
